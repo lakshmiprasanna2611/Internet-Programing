@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 8px;
+            width: 50%;
+        }
+
+        .submit-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+
+        .details-box {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .details-box span {
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        // Function to display stored booking details
+        function displayBookingDetails() {
+            const selectedVehicle = localStorage.getItem('selectedVehicle');
+            const rentalDuration = localStorage.getItem('rentalDuration');
+            const bookingDate = localStorage.getItem('bookingDate');
+            const returnDate = localStorage.getItem('returnDate');
+
+            if (selectedVehicle && rentalDuration && bookingDate && returnDate) {
+                document.getElementById('vehicle-type').textContent = selectedVehicle;
+                document.getElementById('rental-duration').textContent = rentalDuration;
+                document.getElementById('booking-date').textContent = bookingDate;
+                document.getElementById('return-date').textContent = returnDate;
+            }
+        }
+
+        // Function to redirect to confirmation page
+        function proceedToPayment() {
+            // Here you could add any payment validation or processing logic if needed
+            window.location.href = 'confirmation.html'; // Redirect to the confirmation page
+        }
+
+        // Call the function when the page loads
+        window.onload = displayBookingDetails;
+    </script>
+</head>
+<body>
+
+    <h1>Payment Page</h1>
+
+    <div class="details-box">
+        <p><span>Selected Vehicle:</span> <span id="vehicle-type"></span></p>
+        <p><span>Rental Duration:</span> <span id="rental-duration"></span></p>
+        <p><span>Booking Date:</span> <span id="booking-date"></span></p>
+        <p><span>Return Date:</span> <span id="return-date"></span></p>
+    </div>
+
+    <div class="form-group">
+        <label for="payment-method">Choose Payment Method:</label>
+        <select id="payment-method">
+            <option value="credit-card">Credit Card</option>
+            <option value="debit-card">Debit Card</option>
+            <option value="upi">UPI</option>
+            <option value="net-banking">Net Banking</option>
+        </select>
+    </div>
+
+    <!-- Updated button with onclick event -->
+    <button type="button" class="submit-button" onclick="proceedToPayment()">Proceed to Payment</button>
+
+</body>
+</html>

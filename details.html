@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - RentRide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .profile-detail {
+            margin-bottom: 15px;
+        }
+
+        .profile-detail label {
+            font-weight: bold;
+        }
+
+        .profile-detail p {
+            margin: 5px 0;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dashboard-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .dashboard-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to RentRide</h1>
+
+    <div class="profile-container">
+        <h2>User Profile</h2>
+        <div class="profile-detail">
+            <label>Name:</label>
+            <p id="userName"></p>
+        </div>
+        <div class="profile-detail">
+            <label>Mobile:</label>
+            <p id="userMobile"></p>
+        </div>
+        <div class="profile-detail">
+            <label>Email:</label>
+            <p id="userEmail"></p>
+        </div>
+        <div class="profile-detail">
+            <label>Address:</label>
+            <p id="userAddress"></p>
+        </div>
+        <div class="profile-detail">
+            <label>Date of Birth:</label>
+            <p id="userDOB"></p>
+        </div>
+        <div class="profile-detail">
+            <label>Gender:</label>
+            <p id="userGender"></p>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <a href="details.html" class="dashboard-button">Book a Ride</a>
+        <a href="track-booking.html" class="dashboard-button">Upcoming Trips</a>
+    </div>
+
+    <script>
+        // Function to load profile details on the home page
+        function loadProfile() {
+            const name = localStorage.getItem('userName');
+            const mobile = localStorage.getItem('userMobile');
+            const email = localStorage.getItem('userEmail');
+            const address = localStorage.getItem('userAddress');
+            const dob = localStorage.getItem('userDOB');
+            const gender = localStorage.getItem('userGender');
+
+            // Display the details on the homepage
+            document.getElementById('userName').textContent = name;
+            document.getElementById('userMobile').textContent = mobile;
+            document.getElementById('userEmail').textContent = email;
+            document.getElementById('userAddress').textContent = address;
+            document.getElementById('userDOB').textContent = dob;
+            document.getElementById('userGender').textContent = gender;
+        }
+
+        // Call loadProfile when the page is loaded
+        window.onload = loadProfile;
+    </script>
+
+</body>
+</html>

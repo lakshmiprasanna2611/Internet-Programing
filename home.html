@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Rental</title>
+
+    <!-- Inline CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .vehicle-options {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .vehicle {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .vehicle:hover {
+            transform: scale(1.1);
+        }
+
+        .vehicle img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .vehicle p {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            padding: 8px;
+            width: 25%;
+            box-sizing: border-box;
+        }
+
+        /* Smaller date input */
+        #booking-date, #return-date {
+            width: 25%; /* Adjust this value for smaller size */
+            padding: 5px;
+        }
+
+        .submit-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Estimated cost box styling */
+        .cost-box {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .estimated-cost {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+
+    <!-- Inline JavaScript -->
+    <script>
+        const vehicleRates = {
+            car: 500,      
+            bike: 250,
+            scooty: 225,
+            van: 775,
+            truck: 1000
+        };
+
+        // Function to display vehicle info
+        function showVehicleInfo(vehicle) {
+            const infoDiv = document.getElementById('vehicle-info');
+            const vehicleData = {
+                car: "Compact Car - 4 Seats",
+                bike: "Motorbike - 2 Seats",
+                scooty: "Scooty - 2 Seats",
+                van: "Van - 7 Seats",
+                truck: "Truck - 2 Seats"
+            };
+            infoDiv.textContent = vehicleData[vehicle];
+            document.getElementById('selected-vehicle').value = vehicle;
+
+            // Recalculate cost when vehicle is selected
+            calculateCost();
+        }
+
+        // Function to calculate estimated cost
+        function calculateCost() {
+            const vehicle = document.getElementById('selected-vehicle').value;
+            const duration = parseInt(document.getElementById('rental-duration').value);
+
+            if (vehicle && duration) {
+                const cost = vehicleRates[vehicle] * duration;
+                document.getElementById('estimated-cost').textContent = `Estimated Cost: $${cost}`;
+            }
+        }
+
+        // Function to handle form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            const selectedVehicle = document.getElementById('selected-vehicle').value;
+            const rentalDuration = document.getElementById('rental-duration').value;
+            const bookingDate = document.getElementById('booking-date').value;
+            const returnDate = document.getElementById('return-date').value;
+
+            if (selectedVehicle && rentalDuration && bookingDate && returnDate) {
+                // Store data in localStorage
+                localStorage.setItem('selectedVehicle', selectedVehicle);
+                localStorage.setItem('rentalDuration', rentalDuration);
+                localStorage.setItem('bookingDate', bookingDate);
+                localStorage.setItem('returnDate', returnDate);
+
+                // Redirect to payment page
+                window.location.href = 'payment.html';
+            } else {
+                alert('Please fill out all fields before submitting.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Vehicle Rental</h1>
+    </header>
+
+    <main>
+        <h2>Select Vehicle Type</h2>
+        <div class="vehicle-options">
+            <div class="vehicle" onclick="showVehicleInfo('car')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJeE1CjixHHdAzvi370vigt3qOLzIqb472qQ&s" alt="Compact Car">
+                <p>Compact Car</p>
+            </div>
+            <div class="vehicle" onclick="showVehicleInfo('bike')">
+                <img src="bike.jpg" alt="Motorbike">
+                <p>Motorbike</p>
+            </div>
+            <div class="vehicle" onclick="showVehicleInfo('scooty')">
+                <img src="scooty.jpg" alt="Scooty">
+                <p>Scooty</p>
+            </div>
+            <div class="vehicle" onclick="showVehicleInfo('van')">
+                <img src="van.jpg" alt="Van">
+                <p>Van</p>
+            </div>
+            <div class="vehicle" onclick="showVehicleInfo('truck')">
+                <img src="truck.jpg" alt="Truck">
+                <p>Truck</p>
+            </div>
+        </div>
+
+        <div id="vehicle-info" class="vehicle-info"></div>
+        <input type="hidden" id="selected-vehicle">
+
+        <form onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="rental-duration">Rental Duration:</label>
+                <select id="rental-duration" onchange="calculateCost()">
+                    <option value="1">1 Day</option>
+                    <option value="3">3 Days</option>
+                    <option value="7">1 Week</option>
+                    <option value="custom">Custom Duration</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="booking-date">Booking Date:</label>
+                <input type="date" id="booking-date" required>
+            </div>
+            <div class="form-group">
+                <label for="return-date">Return Date:</label>
+                <input type="date" id="return-date" required>
+            </div>
+
+            <!-- Estimated Cost Box -->
+            <div class="cost-box">
+                <p class="estimated-cost" id="estimated-cost">Estimated Cost: $0</p>
+            </div>
+
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Vehicle Rental Co.</p>
+    </footer>
+</body>
+</html>

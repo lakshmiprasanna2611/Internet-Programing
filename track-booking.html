@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .tracking-container {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            display: inline-block;
+            margin-top: 50px;
+        }
+
+        .back-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="tracking-container">
+        <h2>Your Booking Details</h2>
+        <p>Booking ID: 12345</p>
+        <p>Vehicle: Compact Car</p>
+        <p>Rental Duration: 3 Days</p>
+        <p>Pickup Date: 2024-09-19</p>
+        <p>Return Date: 2024-09-22</p>
+
+        <!-- Back button to go to home or other relevant page -->
+        <button class="back-button" onclick="goBack()">Go Back to Home</button>
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = 'main.html'; // Replace with your homepage URL
+        }
+    </script>
+</body>
+</html>
